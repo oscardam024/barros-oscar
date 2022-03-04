@@ -30,7 +30,7 @@ public class ClientController {
         return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
     @PostMapping(path="/clientes")
-    public ResponseEntity<Client> addCity(@RequestBody Client client) {
+    public ResponseEntity<Client> addCliente(@RequestBody Client client) {
         Client clienteanadido = clientService.save(client);
         return new ResponseEntity<>(clienteanadido, HttpStatus.OK);
     }
