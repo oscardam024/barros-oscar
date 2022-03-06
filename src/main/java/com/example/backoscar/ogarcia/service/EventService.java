@@ -15,18 +15,24 @@ public class EventService extends BaseService<Event,Integer, EventRepository>{
     @Autowired
     private EventRepository eventRepository;
 
-    public Page<Event> findAllFiltered(Pageable paginado , @SearchSpec Specification<Event> filtros ){
-
-        return eventRepository.findAll(filtros,paginado);
+    public Page<Event> getEventos(Pageable pageable, @SearchSpec Specification<Event> specs) {
+        return eventRepository.findAll(specs, pageable);
     }
     public void deleteEventoById(Integer id){
         eventRepository.deleteById(id);
     }
-    public Event addEvento(Event evento){
+    public Event createEvent(Event event) {
+        return eventRepository.save(event);
+    }
+    public Event editarEventbyId(Integer id, Event evento) {
+        Event event = eventRepository.findById(id).orElse(evento);
+        evento.setIdEvento(event.getIdEvento());
+
         return eventRepository.save(evento);
     }
     public Event findEventoById(Integer id){
         return eventRepository.findById(id)
                 .orElseThrow(()-> new EventoNotFoundException("Evento con id :"+id+" no funciona"));
     }
+
 }

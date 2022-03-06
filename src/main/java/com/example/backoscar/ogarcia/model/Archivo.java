@@ -12,7 +12,6 @@ public class Archivo {
 
 
     private Integer id;
-    private Integer id_tipo;
     private String ruta;
     private String observable;
 
@@ -33,15 +32,6 @@ public class Archivo {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "Id_Tipo")
-    public Integer getId_tipo() {
-        return id_tipo;
-    }
-
-    public void setId_tipo(Integer id_tipo) {
-        this.id_tipo = id_tipo;
-    }
 
     @Basic
     @Column(name = "Ruta")
@@ -71,7 +61,6 @@ public class Archivo {
         Archivo that = (Archivo) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (id_tipo != null ? !id_tipo.equals(that.id_tipo) : that.id_tipo != null) return false;
         if (ruta != null ? !ruta.equals(that.ruta) : that.ruta != null) return false;
         if (observable != null ? !observable.equals(that.observable) : that.observable != null) return false;
         if (tipoValorA_by_tipoValor_id != null ? !tipoValorA_by_tipoValor_id.equals(that.tipoValorA_by_tipoValor_id) : that.tipoValorA_by_tipoValor_id != null)
@@ -82,7 +71,6 @@ public class Archivo {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (id_tipo != null ? id_tipo.hashCode() : 0);
         result = 31 * result + (ruta != null ? ruta.hashCode() : 0);
         result = 31 * result + (observable != null ? observable.hashCode() : 0);
         result = 31 * result + (tipoValorA_by_tipoValor_id != null ? tipoValorA_by_tipoValor_id.hashCode() : 0);
@@ -103,14 +91,9 @@ public class Archivo {
 
 
 
-    @ManyToMany(mappedBy = "archivos_by_archivos_code")
-    public List<Event> getEventos_by_eventos_code() {
-        return eventos_by_eventos_code;
-    }
 
-    public void setEventos_by_eventos_code(List<Event> eventos_by_eventos_code) {
-        this.eventos_by_eventos_code = eventos_by_eventos_code;
-    }
+
+
 
 
 }

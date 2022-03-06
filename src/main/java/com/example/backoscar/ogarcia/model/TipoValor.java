@@ -12,8 +12,7 @@ public class TipoValor {
     private Integer id;
     private String nombre_tipo;
 
-    @JsonIgnore
-    private List<Diccionario> diccionario_by_Code;
+
     @JsonIgnore
     private List<Archivo> archivo_by_Code;
 
@@ -46,8 +45,7 @@ public class TipoValor {
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (nombre_tipo != null ? !nombre_tipo.equals(that.nombre_tipo) : that.nombre_tipo != null) return false;
-        if (diccionario_by_Code != null ? !diccionario_by_Code.equals(that.diccionario_by_Code) : that.diccionario_by_Code != null)
-            return false;
+
         return archivo_by_Code != null ? archivo_by_Code.equals(that.archivo_by_Code) : that.archivo_by_Code == null;
     }
 
@@ -55,22 +53,11 @@ public class TipoValor {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (nombre_tipo != null ? nombre_tipo.hashCode() : 0);
-        result = 31 * result + (diccionario_by_Code != null ? diccionario_by_Code.hashCode() : 0);
         result = 31 * result + (archivo_by_Code != null ? archivo_by_Code.hashCode() : 0);
         return result;
     }
 
     //RELACIONES
-
-    @OneToMany(mappedBy = "tipoValorD_by_tipoValor_id", fetch = FetchType.LAZY)
-    public List<Diccionario> getDiccionario_by_Code() {
-        return diccionario_by_Code;
-    }
-
-    public void setDiccionario_by_Code(List<Diccionario> diccionario_by_Code) {
-        this.diccionario_by_Code = diccionario_by_Code;
-    }
-
 
     @OneToMany(mappedBy = "tipoValorA_by_tipoValor_id", fetch = FetchType.LAZY)
 
