@@ -17,30 +17,30 @@ import org.springframework.web.bind.annotation.*;
 @RestController()
 public class EventController {
     private EventService eventService;
-    @GetMapping(value = "/lista/")
+    @GetMapping(value = "eventos/lista/")
     public ResponseEntity<Page<Event>> listaEventos(@SearchSpec Specification<Event> filtros,
                                                     @PageableDefault(size = 5, page = 0) @RequestBody Pageable pagina){
         Page<Event> eventos = null;
         eventos = eventService.findAllFiltered(pagina,filtros);
         return new ResponseEntity<>(eventos, HttpStatus.OK);
     }
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("eventos/eliminar/{id}")
     public ResponseEntity<Event> dellEventoById(@PathVariable("id") Integer id){
         Event dellEvento = eventService.findEventoById(id);
         eventService.deleteEventoById(id);
         return new ResponseEntity<>(dellEvento,HttpStatus.OK);
     }
-    @PutMapping("/modificar")
+    @PutMapping("eventos/modificar")
     public ResponseEntity<Event> updateEvento(@RequestBody Event evento){
         Event modEvento = eventService.edit(evento);
         return new ResponseEntity<>(modEvento, HttpStatus.OK);
     }
-    @PostMapping("/add")
+    @PostMapping("eventos/add")
     public ResponseEntity<Event> addEvento(@RequestBody Event evento){
         Event addEvento = eventService.addEvento(evento);
         return new ResponseEntity<>(addEvento, HttpStatus.OK);
     }
-    @GetMapping("/find/{id}")
+    @GetMapping("eventos/find/{id}")
     public ResponseEntity<Event> findEventoById(@PathVariable("id") Integer id){
         Event evento = eventService.findEventoById(id);
         return new ResponseEntity<>(evento, HttpStatus.OK);
