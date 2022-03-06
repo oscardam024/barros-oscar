@@ -49,5 +49,6 @@ public class Client {
             inverseJoinColumns = @JoinColumn(name = "eventId", referencedColumnName = "idEvento")
     )
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Event> eventosAsignados;
 }

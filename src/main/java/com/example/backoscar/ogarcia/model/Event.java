@@ -42,13 +42,14 @@ public class Event {
     @JoinTable(name = "ARCHIVO_EVENTO",
             joinColumns = @JoinColumn(name = "Id_Evento"),
             inverseJoinColumns = @JoinColumn(name = "Id_Archivo"))
-
+    @JsonIgnore
     private List<Archivo> archivos_by_archivos_code;
 
     @ManyToMany
     @JoinTable(name = "DICCIONARIO_EVENTO",
             joinColumns = @JoinColumn(name = "Id_Evento"),
             inverseJoinColumns = @JoinColumn(name = "Id_Diccionario"))
+    @JsonIgnore
     private List<Diccionario> diccionarios_by_diccionarios_code;
 
     @JsonIgnore
