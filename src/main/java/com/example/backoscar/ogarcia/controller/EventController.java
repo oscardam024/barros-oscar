@@ -10,10 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @CrossOrigin("*")
@@ -26,5 +23,26 @@ public class EventController {
         Page<Event> eventos = null;
         eventos = eventService.findAllFiltered(pagina,filtros);
         return new ResponseEntity<>(eventos, HttpStatus.OK);
+    }
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Event> dellEventoById(@PathVariable("id") Integer id){
+        Event dellEvento = eventService.findEventoById(id);
+        eventService.deleteEventoById(id);
+        return new ResponseEntity<>(dellEvento,HttpStatus.OK);
+    }
+    @PutMapping("/modificar")
+    public ResponseEntity<Event> updateEvento(@RequestBody Event evento){
+        Event modEvento = eventService.edit(evento);
+        return new ResponseEntity<>(modEvento, HttpStatus.OK);
+    }
+    @PostMapping("/add")
+    public ResponseEntity<Event> addEvento(@RequestBody Event evento){
+        Event addEvento = eventService.addEvento(evento);
+        return new ResponseEntity<>(addEvento, HttpStatus.OK);
+    }
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Event> findEventoById(@PathVariable("id") Integer id){
+        Event evento = eventService.findEventoById(id);
+        return new ResponseEntity<>(evento, HttpStatus.OK);
     }
 }
