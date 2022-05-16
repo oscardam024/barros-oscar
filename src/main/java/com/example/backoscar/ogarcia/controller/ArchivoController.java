@@ -16,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -39,6 +41,7 @@ public class ArchivoController {
         Archivo addArchivo= archivoService.addArvhivo(nombre);
         return new ResponseEntity<>(addArchivo,HttpStatus.OK);
     }
+
 
     @GetMapping("/find/{id}")
     public ResponseEntity<Archivo> findArchivoById(@PathVariable("id") Integer id){
