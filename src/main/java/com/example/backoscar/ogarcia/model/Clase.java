@@ -1,17 +1,20 @@
 package com.example.backoscar.ogarcia.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,15 +27,30 @@ public class Clase {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idClase;
-
     private String nombreClase;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "alumnos")
-    private List<Alumno>alumnos = new ArrayList<>();
+    @JoinTable(
+            name = "alumnos_asociados",
+            joinColumns = @JoinColumn(name = "alumno_id"),
+            inverseJoinColumns = @JoinColumn(name = "clase_id")
+    )
+    @ManyToMany
+    private List<Alumno> clasesAsignadas;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "profesoresAsignados")
-    private List<Profesor> profesoresAsociados;
+    @JoinTable(
+            name = "profesores_asociados",
+            joinColumns = @JoinColumn(name = "profesor_id"),
+            inverseJoinColumns = @JoinColumn(name = "clase_id")
+    )
+    @ManyToMany
+    private List<Profesor> pclasesAsignadas;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "claseReseva")
+    private List<Reservas> misReservas;
+
 
 }
+

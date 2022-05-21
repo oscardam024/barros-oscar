@@ -42,14 +42,8 @@ public class Profesor {
     @ApiModelProperty(value = "Direccion del profesore", dataType = "String", position = 6, example = "Pepe")
     private String direccion;
 
-    @JsonBackReference
-    @JoinTable(
-            name = "profesorClase",
-            joinColumns = @JoinColumn(name = "profesorId", referencedColumnName = "idProfesor"),
-            inverseJoinColumns = @JoinColumn(name = "claseId", referencedColumnName = "idClase")
-    )
-    @ManyToMany(cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Event> clasesAsignados;
+    @ManyToMany (mappedBy = "pclasesAsignadas")
+    private List<Clase> profesoresAsociados;
 
 }

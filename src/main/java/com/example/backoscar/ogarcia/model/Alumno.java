@@ -2,6 +2,7 @@ package com.example.backoscar.ogarcia.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @Entity
@@ -42,10 +44,12 @@ public class Alumno {
     @ApiModelProperty(value = "Direccion del alumno", dataType = "String", position = 6, example = "Pepe")
     private String direccion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idClase")
-    private Clase Clase;
+    @JsonIgnore
+    @ManyToMany (mappedBy = "clasesAsignadas")
+    private List<Clase> alumnosAsociados;
 
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "alumno")
+    private List<Prestamos> misPrestamos;
 
 }
