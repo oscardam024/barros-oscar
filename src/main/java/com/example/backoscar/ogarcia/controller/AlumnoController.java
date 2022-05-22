@@ -3,6 +3,7 @@ package com.example.backoscar.ogarcia.controller;
 import com.example.backoscar.ogarcia.model.Alumno;
 import com.example.backoscar.ogarcia.model.Clase;
 import com.example.backoscar.ogarcia.model.Client;
+import com.example.backoscar.ogarcia.model.Inventario;
 import com.example.backoscar.ogarcia.service.AlumnoService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -48,10 +49,11 @@ public class AlumnoController {
         Alumno alumnoanadido = alumnoService.save(alumno);
         return new ResponseEntity<>(alumnoanadido, HttpStatus.OK);
     }
-    @DeleteMapping(path="/alumnos")
-    public ResponseEntity<String> deleteAlumno(@RequestBody Alumno alumno) {
-        Optional<Alumno> alumnoanadido = alumnoService.findById(alumno.getIdAlumno());
+    @DeleteMapping(path="/alumnos/{id}")
+    public ResponseEntity<String> deleteAlumno(@PathVariable("id") Integer id) throws Exception {
+        Optional<Alumno> alumnoanadido = alumnoService.findById(id);
         if(alumnoanadido.isPresent()){
+            Alumno alumno = alumnoanadido.orElseThrow(() -> new Exception("No existe el alumno"));
             alumnoService.delete(alumno);
             return new ResponseEntity<>("borrado ejecutado", HttpStatus.OK);
         }

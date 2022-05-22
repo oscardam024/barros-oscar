@@ -49,7 +49,7 @@ public class Alumno {
     private List<Clase> alumnosAsociados;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "alumno")
+    @OneToMany(mappedBy = "alumno" ,cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Prestamos> misPrestamos;
 
 }

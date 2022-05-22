@@ -33,6 +33,16 @@ public class ProfesorController {
         logger.info("fin listaProfesores");
         return new ResponseEntity<>(profesores, HttpStatus.OK);
     }
+    @DeleteMapping(path="/profesores/{id}")
+    public ResponseEntity<String> deleteProfesor(@PathVariable("id") Integer id) throws Exception {
+        Optional<Profesor> profesoranadido = profesorService.findById(id);
+        if(profesoranadido.isPresent()){
+            Profesor profesor = profesoranadido.orElseThrow(() -> new Exception("No existe el alumno"));
+            profesorService.delete(profesor);
+            return new ResponseEntity<>("borrado ejecutado", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Error: no se encontro el alumno", HttpStatus.NOT_FOUND);
+    }
     @PostMapping(path="/profesores")
     public ResponseEntity<Profesor> addProfesor(@RequestBody Profesor profesor) {
         Profesor addprofe = profesorService.save(profesor);
