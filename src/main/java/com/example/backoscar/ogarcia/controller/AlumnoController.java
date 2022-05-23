@@ -2,8 +2,6 @@ package com.example.backoscar.ogarcia.controller;
 
 import com.example.backoscar.ogarcia.model.Alumno;
 import com.example.backoscar.ogarcia.model.Clase;
-import com.example.backoscar.ogarcia.model.Client;
-import com.example.backoscar.ogarcia.model.Inventario;
 import com.example.backoscar.ogarcia.service.AlumnoService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

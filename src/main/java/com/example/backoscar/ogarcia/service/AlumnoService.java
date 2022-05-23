@@ -2,9 +2,7 @@ package com.example.backoscar.ogarcia.service;
 
 import com.example.backoscar.ogarcia.model.Alumno;
 import com.example.backoscar.ogarcia.model.Clase;
-import com.example.backoscar.ogarcia.model.Client;
 import com.example.backoscar.ogarcia.repository.AlumnoRepository;
-import com.example.backoscar.ogarcia.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
