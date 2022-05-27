@@ -33,6 +33,19 @@ public class ProfesorController {
         logger.info("fin listaProfesores");
         return new ResponseEntity<>(profesores, HttpStatus.OK);
     }
+    @GetMapping("/profesores/{id}")
+    public ResponseEntity<Profesor> getProfesor(@PathVariable("id")Integer id) throws Exception {
+        logger.info("inicio listaProfesores");
+        Optional<Profesor> profesor = profesorService.findById(id);
+        if(profesor.isPresent()){
+            Profesor profesor2 = profesor.orElseThrow(() -> new Exception("No existe el alumno"));
+            profesorService.edit(profesor2);
+            return new ResponseEntity<>(profesor2, HttpStatus.OK);
+        }
+
+        logger.info("fin listaProfesores");
+        return null;
+    }
     @DeleteMapping(path="/profesores/{id}")
     public ResponseEntity<String> deleteProfesor(@PathVariable("id") Integer id) throws Exception {
         Optional<Profesor> profesoranadido = profesorService.findById(id);
