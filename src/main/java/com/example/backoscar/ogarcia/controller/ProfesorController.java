@@ -39,7 +39,6 @@ public class ProfesorController {
         Optional<Profesor> profesor = profesorService.findById(id);
         if(profesor.isPresent()){
             Profesor profesor2 = profesor.orElseThrow(() -> new Exception("No existe el alumno"));
-            profesorService.edit(profesor2);
             return new ResponseEntity<>(profesor2, HttpStatus.OK);
         }
 
